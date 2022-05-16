@@ -1,6 +1,7 @@
 package com.codeup.springblog.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Random;
@@ -20,6 +21,12 @@ public class HelloController {
         return "Hello " + name + "!";
     }
     String[] names = {"William", "Javier" ,"Justin"};
+
+    @GetMapping("/hello/{name}")
+    public String sayHello(@PathVariable String name, Model model) {
+        model.addAttribute("name", name);
+        return "hello";
+    }
 
     @GetMapping("/random")
     @ResponseBody
