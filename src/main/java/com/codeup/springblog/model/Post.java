@@ -1,8 +1,21 @@
 package com.codeup.springblog.model;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="posts")
 public class Post {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String body;
 
     public Post(){}
@@ -34,11 +47,11 @@ public class Post {
         this.body = body;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }
