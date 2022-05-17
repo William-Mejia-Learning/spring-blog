@@ -15,7 +15,7 @@ public class PostController {
     private final PostRepository postDao;
 
     public PostController(PostRepository postDao){
-        this.postDao =postDao;
+        this.postDao = postDao;
     }
 
 //    public List<Post> generatePosts(){
@@ -50,18 +50,12 @@ public class PostController {
         return "posts/index";
     }
 
-//    @GetMapping("/posts/{id}")
-//    public String individualPost(@PathVariable long id, Model model){
-//        List<Post> allPosts = generatePosts();
-//        Post post = null;
-//        for (int i = 0; i < allPosts.size(); i++){
-//            if (allPosts.get(i).getId() == id){
-//                post = allPosts.get(i);
-//            }
-//        }
-//        model.addAttribute("post", post);
-//        return "posts/show";
-//    }
+    @GetMapping("/posts/{id}")
+    public String individualPost(@PathVariable long id, Model model){
+        Post post = postDao.findById(id);
+        model.addAttribute("post", post);
+        return "posts/show";
+    }
 
     @GetMapping("/posts/create")
     public String create(){
