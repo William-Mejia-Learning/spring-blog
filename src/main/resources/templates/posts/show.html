@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>View a Post</title>
+  <meta charset="UTF-8">
+  <title>View a Post</title>
 </head>
 <body>
-    <h1> Here is a post</h1>
-    <h2 th:text="${post.title}"></h2>
-    <p> Post Number <span th:text="${post.id}"></span></p>
-    <p th:text="${post.body}"></p>
+<h1> Here is a post</h1>
+<h2 th:text="${post.title}"></h2>
+<p> Post Number <span th:text="${post.id}"></span></p>
+<p th:text="${post.body}"></p>
+<p th:text="${post.history}"></p>
 </body>
 </html>

@@ -18,6 +18,9 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
+    @OneToOne
+    private PostDetails postDetails;
+
     public Post(){}
 
     public Post(String title, String body) {

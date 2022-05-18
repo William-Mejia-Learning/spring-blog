@@ -1,6 +1,7 @@
 package com.codeup.springblog.controller;
 
 import com.codeup.springblog.model.Post;
+import com.codeup.springblog.model.PostDetails;
 import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,14 @@ public class PostController {
         List<Post> allPosts = postDao.findAll();
         model.addAttribute("allPosts", allPosts);
         return "posts/index";
+    }
+
+    @GetMapping("/posts/history/{id}")
+    @ResponseBody
+    public String detailsPost(@PathVariable long id, Model model){
+        Post history = postDao.findById(id);
+        model.addAttribute("history", history);
+        return "post/show";
     }
 
 
