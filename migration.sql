@@ -8,5 +8,7 @@ GRANT ALL PRIVILEGES ON spring_blog_db.* TO 'codeup_test_user1'@'localhost';
 
 SELECT User FROM mysql.user;
 
+# UPDATE posts SET user_id
+
 
 
