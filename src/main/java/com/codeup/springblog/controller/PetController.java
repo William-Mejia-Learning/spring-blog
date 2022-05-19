@@ -1,5 +1,6 @@
 package com.codeup.springblog.controller;
 
+import com.codeup.springblog.model.ChewToy;
 import com.codeup.springblog.model.Pet;
 import com.codeup.springblog.model.PetDetails;
 import com.codeup.springblog.repositories.PetRepository;
@@ -24,7 +25,7 @@ public class PetController {
         return petsDao.findAll();
     }
 
-    @GetMapping("/pets/update/{id}")
+    @GetMapping("/pets/{id}")
     public String returnPetsUpdateView(@PathVariable long id, Model model) {
         Pet pet = petsDao.getById(id);
         model.addAttribute("pet", pet);
@@ -47,6 +48,23 @@ public class PetController {
         // update the database record
         petsDao.save(pet);
 
+        return "redirect:/pets";
+    }
+
+    // TESTING ONE TO MANY RELATIONSHIP...
+    @PostMapping("/pets/{id}/add-toy")
+    public String addToy(
+            @PathVariable long id,
+            @RequestParam String name,
+            @RequestParam String brand,
+            @RequestParam(defaultValue = "false") boolean isDestroyed) {
+
+        Pet pet = petsDao.getById(id);
+        ChewToy toy = new ChewToy(name, brand, isDestroyed, pet);
+        List<ChewToy> chewToys = pet.getChewToys();
+        chewToys.add(toy);
+        pet.setChewToys(chewToys);
+        petsDao.save(pet);
         return "redirect:/pets";
     }
 

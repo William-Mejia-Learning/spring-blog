@@ -1,6 +1,9 @@
 package com.codeup.springblog.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "pets")
@@ -18,6 +21,14 @@ public class Pet {
 
     @OneToOne
     private PetDetails petDetails;
+
+    // list chew toys
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    @JsonManagedReference
+    private List<ChewToy> chewToys;
+
+
 
     public Pet() {
     }
@@ -71,5 +82,13 @@ public class Pet {
                 ", name='" + name + '\'' +
                 ", petDetails=" + petDetails +
                 '}';
+    }
+
+    public List<ChewToy> getChewToys() {
+        return chewToys;
+    }
+
+    public void setChewToys(List<ChewToy> chewToys) {
+        this.chewToys = chewToys;
     }
 }

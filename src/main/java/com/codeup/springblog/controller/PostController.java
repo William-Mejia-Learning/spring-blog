@@ -2,6 +2,7 @@ package com.codeup.springblog.controller;
 
 import com.codeup.springblog.model.Post;
 import com.codeup.springblog.model.PostDetails;
+import com.codeup.springblog.model.PostImage;
 import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,11 +39,17 @@ public class PostController {
 //        return "posts/index";
 //    }
 
+//    @GetMapping("/posts")
+//    public String allPosts(Model model){
+//        List<Post> allPosts = postDao.findAll();
+//        model.addAttribute("allPosts", allPosts);
+//        return "posts/index";
+//    }
+
     @GetMapping("/posts")
-    public String allPosts(Model model){
-        List<Post> allPosts = postDao.findAll();
-        model.addAttribute("allPosts", allPosts);
-        return "posts/index";
+    @ResponseBody
+    public List<Post> returnPost() {
+        return postDao.findAll();
     }
 
     @GetMapping("/posts/history/{id}")
@@ -75,6 +82,22 @@ public class PostController {
     public String postCreate(@RequestParam(name="title") String title, @RequestParam(name="body") String body){
         Post post = new Post(title, body);
         postDao.save(post);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/{id}/add-image")
+    public String addImage(
+            @PathVariable long id,
+            @RequestParam String imageTitle,
+            @RequestParam String url,
+            @RequestParam(defaultValue = "false") boolean isDestroyed) {
+
+        Post pet = postDao.getById(id);
+        PostImage toy = new PostImage(imageTitle, url, pet);
+        List<PostImage> chewToys = pet.getPostImages();
+        chewToys.add(toy);
+        pet.setPostImages(chewToys);
+        postDao.save(pet);
         return "redirect:/posts";
     }
 

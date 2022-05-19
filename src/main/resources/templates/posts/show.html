@@ -5,10 +5,24 @@
   <title>View a Post</title>
 </head>
 <body>
-<h1> Here is a post</h1>
-<h2 th:text="${post.title}"></h2>
-<p> Post Number <span th:text="${post.id}"></span></p>
-<p th:text="${post.body}"></p>
-<p th:text="${post.history}"></p>
+    <h1> Here is a post</h1>
+    <h2 th:text="${post.title}"></h2>
+    <p> Post Number <span th:text="${post.id}"></span></p>
+    <th:block th:each="postImg: ${post.postImages}">
+      <img th:src="${postImg.url}" alt="">
+    </th:block>
+    <p th:text="${post.body}"></p>
+
+    <h3>Add Image form</h3>
+    <form th:action="@{/posts/{id}/add-image(id=${post.id})}" th:method="post">
+      <!--        name, brand, is_destroyed, description, pet_id-->
+      <label for="imageTitle"title>Title</label>
+      <input id="imageTitle" type="text" name="imageTitle" placeholder="enter title">
+      <br>
+      <label for="url">URL</label>
+      <input id="url" type="text" name="url" placeholder="enter brand">
+      <br>
+      <button>Add Image</button>
+    </form>
 </body>
 </html>

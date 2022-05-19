@@ -1,8 +1,10 @@
 package com.codeup.springblog.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="posts")
@@ -21,6 +23,10 @@ public class Post {
     @OneToOne
     private PostDetails postDetails;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @JsonManagedReference
+    private List<PostImage> postImages;
+
     public Post(){}
 
     public Post(String title, String body) {
@@ -32,6 +38,19 @@ public class Post {
         this.id = id;
         this.title = title;
         this.body = body;
+    }
+
+    public Post(String title, String body, PostDetails postDetails, List<PostImage> postImages) {
+        this.title = title;
+        this.body = body;
+        this.postDetails = postDetails;
+        this.postImages = postImages;
+    }
+
+    public Post(String title, String body, List<PostImage> postImages) {
+        this.title = title;
+        this.body = body;
+        this.postImages = postImages;
     }
 
     public String getTitle() {
@@ -56,5 +75,13 @@ public class Post {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<PostImage> getPostImages() {
+        return postImages;
+    }
+
+    public void setPostImages(List<PostImage> postImages) {
+        this.postImages = postImages;
     }
 }

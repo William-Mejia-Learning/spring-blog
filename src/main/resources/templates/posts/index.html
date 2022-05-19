@@ -9,8 +9,23 @@
 <ul th:each="post : ${allPosts}">
     <li>
         <h2 th:text="${post.title}"></h2>
+        <th:block th:each="postImg: ${post.postImages}">
+            <img th:src="${postImg.url}" alt="">
+        </th:block>
         <p th:text="${post.body}"></p>
     </li>
+
+<!--    <h3>Add Image form</h3>-->
+<!--    <form th:action="@{/posts/{id}/add-image(id=${post.id})}" th:method="post">-->
+<!--        &lt;!&ndash;        name, brand, is_destroyed, description, pet_id&ndash;&gt;-->
+<!--        <label for="imageTitle"title>Title</label>-->
+<!--        <input id="imageTitle" type="text" name="image" placeholder="enter title">-->
+<!--        <br>-->
+<!--        <label for="url">URL</label>-->
+<!--        <input id="url" type="text" name="url" placeholder="enter brand">-->
+<!--        <br>-->
+<!--        <button>Add Image</button>-->
+<!--    </form>-->
 
 </ul>
 </body>

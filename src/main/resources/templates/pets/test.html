@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,6 +6,7 @@
   <title>Title</title>
 </head>
 <body>
+
 <h1 th:text="${pet.name}"></h1>
 <h3>Weighs: <span th:text="${pet.petDetails.weightInOunces}"></span></h3>
 <h3 th:text="${pet.petDetails.personalityDescription}"></h3>
@@ -13,6 +15,30 @@
   <label for="personality">Personality</label>
   <input id="personality" type="text" name="personality" th:value="${pet.petDetails.personalityDescription}">
   <button>Change Personality</button>
+</form>
+
+<hr>
+
+<h1><span th:text="${pet.name}"></span> toys...</h1>
+
+<ul th:each="toy : ${pet.chewToys}">
+  <li th:text="${toy.name}"></li>
+</ul>
+
+
+<h3>Add new chew toy form</h3>
+<form th:action="@{/pets/{id}/add-toy(id=${pet.id})}" th:method="post">
+  <!--        name, brand, is_destroyed, description, pet_id-->
+  <label for="name">Name</label>
+  <input id="name" type="text" name="name" placeholder="enter name">
+  <br>
+  <label for="brand">Brand</label>
+  <input id="brand" type="text" name="brand" placeholder="enter brand">
+  <br>
+  <label for="destroyed">Destroyed?</label>
+  <input id="destroyed" type="checkbox" placeholder="is destroyed" name="isDestroyed">
+  <br>
+  <button>Add Toy</button>
 </form>
 
 </body>

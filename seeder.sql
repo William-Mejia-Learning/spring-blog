@@ -17,3 +17,12 @@ VALUES (3, 'Sparky', 'Dog', null),
        (4, 'Sampson', 'Fish', 2),
        (5, 'Chili', 'Alligator', 3),
        (2, 'Spot', 'Snake', 4);
+
+INSERT INTO chew_toys (brand, is_destroyed, name, pet_id)
+VALUES ('Good Boi Inc.', FALSE, 'bone', 2),
+       ('Good String Inc.', TRUE, 'bundle of yarn', 2),
+       ('Toys Arf Us.', FALSE, 'rope', 2),
+       ('Not For Tennis', FALSE, 'green chew ball', 3);
+
+
+
