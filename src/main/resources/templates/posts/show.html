@@ -9,5 +9,9 @@
     <h2 th:text="${post.title}"></h2>
     <p> Post Number <span th:text="${post.id}"></span></p>
     <p th:text="${post.body}"></p>
+<!--    <th:block th:each="user : ${post.user.email}">-->
+<!--        <p th:text="${user}"></p>-->
+<!--    </th:block>-->
+    <p th:text="${post.user.email}"></p>
 </body>
 </html>
