@@ -1,5 +1,6 @@
 package com.codeup.springblog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
@@ -23,6 +24,17 @@ public class Post {
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    @ManyToOne
+//    @JoinColumn(name="user_id")
+//    @JsonBackReference
+    private User user;
+
+    public Post(String title, String body, User user) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
     }
 
     public Post(int id, String title, String body) {
@@ -53,5 +65,13 @@ public class Post {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

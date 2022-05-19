@@ -1,24 +1,27 @@
 package com.codeup.springblog.controller;
 
 import com.codeup.springblog.model.Post;
+import com.codeup.springblog.model.User;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao){
+    public PostController(PostRepository postDao, UserRepository userDao){
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
-//    public List<Post> generatePosts(){
+    //    public List<Post> generatePosts(){
 //        List<Post> allPosts = new ArrayList<>();
 //        Post post1 = new Post(1, "First post", "This is my first post!");
 //        Post post2 = new Post(2, "Another post!", "Amazing content!");
@@ -63,8 +66,12 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String postCreate(@RequestParam(name="title") String title, @RequestParam(name="body") String body){
+    public String postCreate(@RequestParam(
+            name="title") String title, @RequestParam(name="body") String body){
+        User user = userDao.findAll().get(0);
         Post post = new Post(title, body);
+        post.setUser(user);
+        System.out.println(user);
         postDao.save(post);
         return "redirect:/posts";
     }
