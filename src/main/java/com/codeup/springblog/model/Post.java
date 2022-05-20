@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="posts")
@@ -19,7 +20,7 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
-    public Post(){}
+
 
     public Post(String title, String body) {
         this.title = title;
@@ -31,6 +32,21 @@ public class Post {
 //    @JsonBackReference
     private User user;
 
+    @ManyToMany
+    @JoinTable(
+            name="post_tag",
+            joinColumns = @JoinColumn(name="post_id"),
+            inverseJoinColumns = @JoinColumn(name="tag_id")
+    )
+    private List<Tag> postTags;
+
+    public Post(String title, String body, List<Tag> postTags) {
+        this.title = title;
+        this.body = body;
+        this.postTags = postTags;
+    }
+
+
     public Post(String title, String body, User user) {
         this.title = title;
         this.body = body;
@@ -41,6 +57,10 @@ public class Post {
         this.id = id;
         this.title = title;
         this.body = body;
+    }
+
+    public Post() {
+
     }
 
     public String getTitle() {
@@ -73,5 +93,13 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Tag> getPostTags() {
+        return postTags;
+    }
+
+    public void setPostTags(List<Tag> postTags) {
+        this.postTags = postTags;
     }
 }

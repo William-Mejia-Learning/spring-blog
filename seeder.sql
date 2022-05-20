@@ -9,3 +9,11 @@ INSERT INTO posts(body, title, user_id)
 VALUES ('This is a body', 'Title 1', 1),
        ('This is a body for title 2', 'Title 2', 1),
        ('This is a body for title 3', 'Title 3', 2);
+
+INSERT INTO tags(name) VALUES ('Silly'),
+                              ('Funny'),
+                              ('Humor');
+
+INSERT INTO post_tag(post_id, tag_id) VALUES (1,2),
+                                             (2,1),
+                                             (2,3);

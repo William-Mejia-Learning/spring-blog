@@ -21,25 +21,6 @@ public class PostController {
         this.userDao = userDao;
     }
 
-    //    public List<Post> generatePosts(){
-//        List<Post> allPosts = new ArrayList<>();
-//        Post post1 = new Post(1, "First post", "This is my first post!");
-//        Post post2 = new Post(2, "Another post!", "Amazing content!");
-//        Post post3 = new Post(3, "Third post", "Fascinating information!");
-//        allPosts.add(post1);
-//        allPosts.add(post2);
-//        allPosts.add(post3);
-//        return allPosts;
-//    }
-
-
-//    @GetMapping("/posts")
-//    public String allPosts(Model model){
-//        List<Post> allPosts = generatePosts();
-//        model.addAttribute("allPosts", allPosts);
-//        return "posts/index";
-//    }
-
     @GetMapping("/posts")
     public String allPosts(Model model){
         List<Post> allPosts = postDao.findAll();
