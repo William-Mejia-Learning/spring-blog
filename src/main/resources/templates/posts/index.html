@@ -13,6 +13,9 @@
             <th:block th:each="user : ${post.user}">
                 <p th:text="${user.email}"></p>
             </th:block>
+            <th:block th:each="tag : ${post.postTags}">
+                <p th:text="${tag.name}"></p>
+            </th:block>
         </li>
 
     </ul>
