@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Movies</h2>
+
+<div>
+  <form action="/search" th:method="post">
+    <label for="search">Search: </label>
+    <input type="text" name="search" id="search">
+    <button type="submit">Search!</button>
+  </form>
+</div>
+
+
+<table>
+  <thead>
+  <tr>
+    <th>Cover</th>
+    <th>Title</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr th:each="movie : ${movies}">
+    <td><img th:src="${movie.coverImage}"></td>
+    <td><a th:href="@{/movie/{id}(id=${movie.id})}">[[${movie.title}]]</a></td>
+    <td>
+      <form th:method="post"
+            th:action="@{/movies/delete}"
+      > <button type="submit" name="id" th:value="${movie.id}">X</button> </form> </td>
+
+  </tr>
+  </tbody>
+</table>
+
+
+</body>
+</html>
