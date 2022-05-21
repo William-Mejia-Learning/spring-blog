@@ -23,6 +23,7 @@ public class Movie {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
 
+
     private String coverImage;
 
     public Movie() {

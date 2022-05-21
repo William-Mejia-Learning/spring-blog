@@ -43,7 +43,7 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String create(Model model){
-        model.addAttribute("posts", new Post());
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
@@ -55,7 +55,7 @@ public class PostController {
 
     @GetMapping("/posts/{id}/edit")
     public String updatePost(@PathVariable long id, Model model){
-        model.addAttribute("posts", postDao.findById(id));
+        model.addAttribute("post", postDao.findById(id));
         return "posts/edit";
     }
 
