@@ -1,6 +1,6 @@
 USE spring_blog_db;
 
-INSERT INTO users(email, password, user_name)
+INSERT INTO users(email, password, username)
 VALUES ('email@email', 'password', 'user1'),
        ('email2@email', 'password', 'user2'),
        ('email3@email', 'password', 'user3');
