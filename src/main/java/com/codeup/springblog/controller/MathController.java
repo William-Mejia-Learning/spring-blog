@@ -1,11 +1,15 @@
 package com.codeup.springblog.controller;
 
+import com.codeup.springblog.services.MathService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MathController {
+
+    MathService mathService = new MathService();
+
     @RequestMapping(path = "/add100To/{number}", method = RequestMethod.GET)
     @ResponseBody
     public String addOneHundred(@PathVariable int number){
@@ -32,8 +36,8 @@ public class MathController {
 
     @GetMapping("/divide/{num1}/and/{num2}")
     @ResponseBody
-    public String divideNum(@PathVariable double num1, @PathVariable double num2){
-        return  num1 +" / " + num2 + " = " + (num1 / num2);
+    public double divideNum(@PathVariable double num1, @PathVariable double num2){
+        return mathService.divide(num1, num2);
     }
 
 
@@ -49,17 +53,7 @@ public class MathController {
         @RequestParam(name="operation") String operation,
         Model model
     ){
-        double total = 0L;
-        switch (operation){
-            case "add":
-                total = inputA + inputB;
-            case "subtract":
-                total = inputA - inputB;
-            case "multiply":
-                total = inputA * inputB;
-            case "divide":
-                total = inputA / inputB;
-        }
+        double total = mathService.doOperation(operation, inputA, inputB);
 
         model.addAttribute("total", total);
 
