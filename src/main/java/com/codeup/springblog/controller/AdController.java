@@ -58,23 +58,23 @@ public class AdController {
         return "ads/create-ad";
     }
 
-    @PostMapping("/ads/create")
-    public String create(
-            @ModelAttribute Ad newAd
-    ) {
-//        Ad ad = new Ad();
-//        ad.setTitle(title);
-//        ad.setDescription(description);
-
-
-        // save the ad...
-        newAd.setOwner(userDao.getById(1L)); //Go into the DB - get my one user hardcoded style :D
-        emailService.prepareAndSend(newAd, "New ad created", "Your new Ad has been created on the Spring AdLister!");
-        adDao.save(newAd);
-
-
-        return "redirect:/ads";
-    }
+//    @PostMapping("/ads/create")
+//    public String create(
+//            @ModelAttribute Ad newAd
+//    ) {
+////        Ad ad = new Ad();
+////        ad.setTitle(title);
+////        ad.setDescription(description);
+//
+//
+//        // save the ad...
+//        newAd.setOwner(userDao.getById(1L)); //Go into the DB - get my one user hardcoded style :D
+//        emailService.prepareAndSend(newAd, "New ad created", "Your new Ad has been created on the Spring AdLister!");
+//        adDao.save(newAd);
+//
+//
+//        return "redirect:/ads";
+//    }
 
 
 }
