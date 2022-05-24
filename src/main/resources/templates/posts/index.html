@@ -24,7 +24,7 @@
                 <p th:text="${tag.name}"></p>
             </th:block>
             <form th:method="post"
-                  th:action="@{/posts/delete}"
+                  th:action="@{'/posts/' + ${post.id} +'/delete'}"
             > <button type="submit" name="id" th:value="${post.id}">Delete</button> </form>
         </li>
 
