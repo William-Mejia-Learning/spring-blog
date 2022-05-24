@@ -1,9 +1,11 @@
 package com.codeup.springblog.controller;
 
 import com.codeup.springblog.model.Post;
+import com.codeup.springblog.model.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,8 +54,11 @@ public class PostController {
     @PostMapping("/posts/create")
     public String postCreate(@ModelAttribute Post post){
 
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = user.getId();
+
                 // save the ad...
-        post.setUser(userDao.getById(1L)); //Go into the DB - get my one user hardcoded style :D
+        post.setUser(userDao.getById(userId)); //Go into the DB - get my one user hardcoded style :D
         emailService.prepareAndSend(post, "New Post was created", "Your new Post has been created on the Spring AdLister!");
 
         postDao.save(post);
