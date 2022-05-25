@@ -3,6 +3,10 @@ package com.codeup.springblog.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -13,10 +17,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank
+    @Size(min = 3, max = 10)
     private String username;
 
+    @NotBlank
+    @Email
     private String email;
 
+    @NotBlank
+    @Min(8)
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
