@@ -8,8 +8,12 @@ import com.codeup.springblog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -52,7 +56,20 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String postCreate(@ModelAttribute Post post){
+    public String postCreate(@Valid @ModelAttribute Post post, Errors validation, Model model){
+
+        if(post.getTitle().length() < 3 || post.getBody().isEmpty()){
+            validation.rejectValue(
+                    "title",
+                    "post.title",
+                    "Error creating post"
+            );
+            }
+            if (validation.hasErrors()) {
+                model.addAttribute("errors", validation);
+                model.addAttribute("post", post);
+                return "posts/create";
+            }
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = user.getId();
