@@ -29,6 +29,8 @@ public class User {
     @Min(8)
     private String password;
 
+    private String img;
+
     @OneToMany(cascade = CascadeType.ALL)
 //    @JsonManagedReference
     private List<Post> postList;
@@ -39,12 +41,20 @@ public class User {
         this.password = password;
     }
 
+    public User(String username, String email, String password, String img) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.img = img;
+    }
+
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
         postList = copy.postList;
         username = copy.username;
         password = copy.password;
+        img = copy.img;
     }
 
     public User() {
@@ -83,7 +93,11 @@ public class User {
         this.password = password;
     }
 
+    public String getImg() {
+        return img;
+    }
 
-
-
+    public void setImg(String img) {
+        this.img = img;
+    }
 }
