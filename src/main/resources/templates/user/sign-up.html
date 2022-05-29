@@ -6,23 +6,26 @@
 </head>
 <body>
 <h1>Create an account</h1>
-<form th:action="@{/sign-up}" method="POST" th:object="${user}">
+<form th:action="@{'/sign-up?error'}" method="POST" th:object="${user}">
+  <ul>
+    <li th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></li>
+    <li th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></li>
+    <li th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></li>
+
+  </ul>
   <div>
     <label for="username">Username</label>
     <input id="username" th:field="*{username}" />
-    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
   </div>
 
   <div>
     <label for="email">Email</label>
     <input id="email" th:field="*{email}" />
-    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
   </div>
 
   <div>
     <label for="password">Password</label>
     <input id="password" type="password" th:field="*{password}" />
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
   </div>
 
   <input value="Sign me up!" type="submit" />
