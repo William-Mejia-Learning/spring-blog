@@ -28,7 +28,16 @@
     <input id="password" type="password" th:field="*{password}" />
   </div>
 
+  <div>
+    <label for="image">Upload image:</label>
+    <input type="text" id="image" th:field="*{img}">
+  </div>
+
   <input value="Sign me up!" type="submit" />
 </form>
+
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/keys.js}"></script>
 </body>
 </html>
