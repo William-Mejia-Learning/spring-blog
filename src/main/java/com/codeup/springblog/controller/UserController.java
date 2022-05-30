@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping("/sign-up")
     public String saveUser(@Valid @ModelAttribute User user, BindingResult validation, Model model){
 
-        if(user.getUsername().length() < 3 || user.getPassword().length() < 8 || user.getEmail().isEmpty()){
+        if(user.getUsername().length() < 3 || user.getPassword().length() < 8 || user.getEmail().isEmpty() || !user.getPassword().equals(user.getConfirm())){
             validation.addError(new FieldError("user", "username", "Username Error"));
             validation.addError(new FieldError("user", "email", "Email Error"));
             validation.addError(new FieldError("user", "password", "Password Error"));

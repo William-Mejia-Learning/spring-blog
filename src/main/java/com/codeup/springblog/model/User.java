@@ -29,6 +29,10 @@ public class User {
     @Min(8)
     private String password;
 
+    @NotBlank
+    @Min(8)
+    private String confirm;
+
     private String img;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -99,5 +103,13 @@ public class User {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getConfirm() {
+        return confirm;
+    }
+
+    public void setConfirm(String confirm) {
+        this.confirm = confirm;
     }
 }
